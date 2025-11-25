@@ -20,7 +20,7 @@ Tipos posibles:
  contrato de prestación de servicios pj
 - resolución
 - PQRS
-- otro
+- otro (extrae campos relevantes)
 
 ###Criteros de desicion si es contrato###
 - **PS PJ (persona jurídica):**

@@ -29,7 +29,7 @@ CAMPOS A EXTRAER:
 -Creador(Entidad responsable de la creación del contenido)
 -Fecha (creacion publicacion del articulo)
 -Tema 
--Descripcion (literal)
+-Descripcion (literal, de no haber error devuelve vacio)
 -Formato
 -Identificador(Una referencia única para el recurso, ejemplo: URL)
 -Editor

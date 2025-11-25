@@ -80,10 +80,9 @@ DOCUMENTO DE IDENTIDAD:
 - Código MRZ (si aplica) 
 - Estado del documento (vigente, vencido, cancelado) 
 
-### CRITERIOS ESPECIFICOS PARA CONTRATOS
+### CRITERIOS ESPECIFICOS PARA CONTRATOS: No devuelvas ningún campo adicional.
 
 **Contrato de prestacion de servicios - persona natural (PS PN)**
--Tipo de contrato 
 -Nombre contratista 
 -Doc. Identidad del contratista 
 -Dirección de notificación del contratista 
@@ -94,15 +93,15 @@ DOCUMENTO DE IDENTIDAD:
 -Cláusula Segunda. - Valor del Contrato(numero) 
 -Empleador 
 -fecha de inicio (Fecha de ejecución o fecha de firma) 
-valor total: si se mencionan auxilios, bonos, salario en especie o Beneficio extralegal sumarlos al valor del contrato
+-valor total: si se mencionan auxilios, bonos, salario en especie o Beneficio extralegal sumarlos al valor del contrato
 
 
 **Contrato de prestacion de servicios - persona jurídica (PS PJ)**
 El contratista es una empresa o entidad (palabras clave: “NIT”, “razón social”, “sociedad”, “S.A.S.”, “S.A.”, “E.U.”, “persona jurídica”, “empresa contratista”).
--Tipo de contrato 
--Nombre empleador, que es la empresa quien contrata 
--Nombre persona juridica, que es la empresa que presta el servicio a la empresa contratante 
--Objeto del contrato sintetizar no mas de 150 caracteres
+
+-Nombre empleador
+-Nombre persona juridica
+-Objeto del contrato (sintetizar no mas de 80 caracteres)
 -Fecha de inicio (Fecha de ejecución o fecha de firma esta antes de la firma no tomes la fecha de version del documento) 
 -Valor del Contrato (devolver la totalidad del valor en numeros) 
 -Tipo de pago (mensual o cumplimiento de actividades) sintetizar a partir de clausulas economicas
@@ -110,7 +109,6 @@ El contratista es una empresa o entidad (palabras clave: “NIT”, “razón so
 **Contrato laboral a termino indefinido**
 Menciona conceptos laborales (“empleado”, “trabajador”, “subordinado”, “salario”, “nomina”, “prestaciones”, “beneficios laborales”).
 -Nombre del empleador 
--Tipo de contrato
 -Valor del Contrato (devolver la totalidad del valor en numeros, de no encontrarlo ve a la secciones que lo especifican para obtenerlo)
 -Fecha inicio 
 -Objeto del contrato o segunda -funciones 
@@ -121,7 +119,14 @@ Menciona conceptos laborales (“empleado”, “trabajador”, “subordinado�
     response = requests.post(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
         params={"key": GEMINI_API_KEY},
-        json={"contents": [{"parts": [{"text": prompt}]}]},
+        json={
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0,
+                "topK": 1,
+                "topP": 0
+            }
+        }
     )
 
     if response.status_code != 200:
@@ -145,7 +150,7 @@ Menciona conceptos laborales (“empleado”, “trabajador”, “subordinado�
                     contenido_unido.update(item)
             json_result["contenido"] = contenido_unido
 
-        # 🔹 Limpieza final de barras invertidas sobrantes al final
+        # Limpieza final de barras invertidas sobrantes al final
         def limpiar_valores(data):
             if isinstance(data, dict):
                 return {k: limpiar_valores(v) for k, v in data.items()}

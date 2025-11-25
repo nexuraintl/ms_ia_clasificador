@@ -8,3 +8,5 @@ pandas
 openpyxl
 requests
 pdf2image
+opencv-python
+numpy
