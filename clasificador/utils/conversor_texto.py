@@ -88,9 +88,9 @@ def auto_rotate(image: Image.Image, lang: str = "spa") -> Image.Image:
 def _preprocess_for_ocr(img: Image.Image) -> Image.Image:
     img = auto_rotate(img)
     g = ImageOps.grayscale(img)
-    if g.width < 1200:
-        ratio = 1200 / float(g.width)
-        g = g.resize((1200, int(g.height * ratio)), Image.LANCZOS)
+    if g.width < 1000:
+        ratio = 1000 / float(g.width)
+        g = g.resize((1000, int(g.height * ratio)), Image.LANCZOS)
     g = ImageOps.autocontrast(g)
     return g
 
@@ -156,8 +156,8 @@ def convertir_a_txt(file_bytes: bytes, extension: str, lang_ocr: str = "spa") ->
                 # limita la cantidad de páginas a procesar en 30 y dpi a 150
                 file_bytes,
                 lang=lang_ocr,
-                dpi=150,
-                max_pages=30,
+                dpi=120,
+                max_pages=10,
             )
             # Conserva el más largo y con más contenido
             if len(texto_ocr) > len(texto_directo or ""):
