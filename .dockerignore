@@ -1,0 +1,9 @@
+venv/
+env/
+# Archivos de configuración locales
+.env
+*.env
+.env.*
+.gitignore
+.git
+__pycache__/

@@ -1,0 +1,13 @@
+flask
+gunicorn
+PyPDF2
+python-docx
+pytesseract
+pillow
+pandas
+openpyxl
+requests
+pdf2image
+opencv-python-headless
+numpy
+flask-cors
